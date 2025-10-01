@@ -13,13 +13,13 @@ class Config:
     OPENAI_API_KEY = os.getenv('OPENAI_API_KEY', '')
     
     # Models
-    CHAT_MODEL = os.getenv('CHAT_MODEL', 'gpt-3.5-turbo')
+    CHAT_MODEL = os.getenv('CHAT_MODEL', 'gpt-4o-mini')
     VISION_MODEL = os.getenv('VISION_MODEL', 'gpt-4o-mini')
     
     # Settings
     MAX_TEXT_LENGTH = 3000
-    SUMMARY_MAX_SENTENCES = 3
-    TEMPERATURE = 0.1
+    SUMMARY_MAX_SENTENCES = 15
+    TEMPERATURE = 0.3
     
     # File Support
     SUPPORTED_EXTENSIONS = ('.pdf', '.docx', '.doc', '.jpg', '.jpeg', '.png')
