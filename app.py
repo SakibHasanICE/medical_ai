@@ -7,7 +7,7 @@ from config import Config
 # Add current directory to path
 
 headers={
-    "authorization": f"Bearer {Config.OPENAI_API_KEY}",
+    "authorization": st.secrets["OPENAI_API_KEY"],
     "content-type": "application/json"
 }
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
