@@ -207,7 +207,7 @@ class AIExtractor:
                     {"role": "system", "content": system_msg},
                     {"role": "user", "content": prompt}
                 ],
-                temperature=0.3,
+                temperature=Config.TEMPERATURE,
                 max_tokens=500
             )
             return response.choices[0].message.content.strip()
