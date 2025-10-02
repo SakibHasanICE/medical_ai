@@ -2,12 +2,27 @@ import streamlit as st
 import os
 import sys
 import tempfile
-from config import Config
+
+from dotenv import load_dotenv
+
 
 # Add current directory to path
 
-headers={
-    "authorization": st.secrets["OPENAI_API_KEY"],
+load_dotenv()
+
+# Prefer Streamlit secrets if available
+if "OPENAI_API_KEY" in st.secrets:
+    api_key = st.secrets["OPENAI_API_KEY"]
+else:
+    api_key = os.getenv("OPENAI_API_KEY")
+
+# Check if API key exists
+if not api_key:
+    st.error("❌ No OpenAI API key found. Please set it in .env (local) or Streamlit Secrets (cloud).")
+
+# Use it in headers
+headers = {
+    "authorization": f"Bearer {api_key}",
     "content-type": "application/json"
 }
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
