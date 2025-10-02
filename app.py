@@ -10,21 +10,22 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-# Prefer Streamlit secrets if available
-if "OPENAI_API_KEY" in st.secrets:
-    api_key = st.secrets["OPENAI_API_KEY"]
-else:
-    api_key = os.getenv("OPENAI_API_KEY")
 
-# Check if API key exists
+def get_openai_api_key():
+    # Prefer Streamlit Cloud secrets
+    if "OPENAI_API_KEY" in st.secrets:
+        return st.secrets["OPENAI_API_KEY"]
+    # Fallback to .env
+    elif os.getenv("OPENAI_API_KEY"):
+        return os.getenv("OPENAI_API_KEY")
+    else:
+        return None
+
+api_key = get_openai_api_key()
+
 if not api_key:
-    st.error("❌ No OpenAI API key found. Please set it in .env (local) or Streamlit Secrets (cloud).")
-
-# Use it in headers
-headers = {
-    "authorization": f"Bearer {api_key}",
-    "content-type": "application/json"
-}
+    st.error("❌ OpenAI API key not found! Please set it in `.env` (local) or Streamlit Secrets (cloud).")
+    st.stop()
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 try:
