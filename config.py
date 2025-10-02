@@ -18,12 +18,16 @@ class Config:
     
     # Settings
     MAX_TEXT_LENGTH = 3000
-    SUMMARY_MAX_SENTENCES = 15
-    TEMPERATURE = 0.3
+    SUMMARY_MAX_SENTENCES = 20
+    TEMPERATURE = 0.5
     
     # File Support
     SUPPORTED_EXTENSIONS = ('.pdf', '.docx', '.doc', '.jpg', '.jpeg', '.png')
     MAX_FILE_SIZE_MB = 50
+    
+    # Tesseract Configuration (for Windows)
+    TESSERACT_PATH = os.getenv('TESSERACT_PATH', r'C:\Program Files\Tesseract-OCR\tesseract.exe')
+    TESSERACT_LANGUAGES = 'fra+eng'  # French + English
     
     @classmethod
     def validate(cls):
