@@ -3,29 +3,7 @@ import os
 import sys
 import tempfile
 
-from dotenv import load_dotenv
 
-
-# Add current directory to path
-
-load_dotenv()
-
-
-def get_openai_api_key():
-    # Prefer Streamlit Cloud secrets
-    if "OPENAI_API_KEY" in st.secrets:
-        return st.secrets["OPENAI_API_KEY"]
-    # Fallback to .env
-    elif os.getenv("OPENAI_API_KEY"):
-        return os.getenv("OPENAI_API_KEY")
-    else:
-        return None
-
-api_key = get_openai_api_key()
-
-if not api_key:
-    st.error("❌ OpenAI API key not found! Please set it in `.env` (local) or Streamlit Secrets (cloud).")
-    st.stop()
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 try:
